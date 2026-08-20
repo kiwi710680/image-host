@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Image URL</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 400px;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    .url-box {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 6px;
+      background: #1565c0;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0d47a1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>Image URL</h1>
+
+    <p>圖片：</p>
+
+    <img
+      id="image"
+      src="images/PHD_LOGO+NAME.svg"
+      alt="Example image"
+    >
+
+    <p>Direct image URL：</p>
+
+    <div class="url-box">
+      <input id="imageUrl" readonly>
+      <button onclick="copyUrl()">Copy</button>
+    </div>
+
+  </div>
+
+  <script>
+    const image = document.getElementById("image");
+    const imageUrl = document.getElementById("imageUrl");
+
+    // 自動取得圖片完整網址
+    imageUrl.value = new URL(
+      image.getAttribute("src"),
+      window.location.href
+    ).href;
+
+    function copyUrl() {
+      navigator.clipboard.writeText(imageUrl.value);
+
+      const button = document.querySelector("button");
+      button.textContent = "Copied!";
+
+      setTimeout(() => {
+        button.textContent = "Copy";
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
